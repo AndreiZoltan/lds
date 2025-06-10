@@ -1,0 +1,235 @@
+\documentclass[a4paper, 11pt, twoside]{article}
+
+\author{Андрей Султан}
+% \title{Топология}
+\date{\today}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF                                 UNLOCK
+% \usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+% \usepackage[cp1251]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[indentfirst]{titlesec} % абзацпосле первого заголовка
+\frenchspacing                      % равные пробелы между словами и предложениями
+
+\usepackage{amssymb,amsmath,amsthm,amsfonts,commath,bm,mathtools}
+% \usepackage{icomma}                                    % "Умная" запятая                                 UNLOCK
+
+%%% Свои символы и команды
+% \usepackage{centernot} % центрированное зачеркивание символа                                 UNLOCK
+% \usepackage{stmaryrd}  % некоторые спецсимволы                                 UNLOCK
+
+\newcommand{\eps}{\ensuremath{\varepsilon}}
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+\renewcommand{\kappa}{\ensuremath{\varkappa}}
+\renewcommand{\le}{\ensuremath{\leqslant}}
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\ge}{\ensuremath{\geqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\ke}{Ker}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\PR}{P}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Cl}{Cl}
+
+\newcommand{\rom}[1]{%
+  \textup{\uppercase\expandafter{\romannumeral#1}}%
+}\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Cm}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\id}{\mathrm{id}}
+
+\newcommand\quotient[2]{
+        \mathchoice
+            {% \displaystyle
+                \text{\raise1ex\hbox{$#1$}\Big/\lower1ex\hbox{$#2$}}%
+            }
+            {% \textstyle
+                #1\,/\,#2
+            }
+            {% \scriptstyle
+                #1\,/\,#2
+            }
+            {% \scriptscriptstyle  
+                #1\,/\,#2
+            }
+    }
+
+% \newcommand{\imp}[2]{
+% 	(#1\,\,$\ra$\,\,#2)\,\,
+% }
+% \newcommand{\System}[1]{
+% 	\left\{\begin{aligned}#1\end{aligned}\right.
+% }
+% \newcommand{\Root}[2]{
+% 	\left\{\!\sqrt[#1]{#2}\right\}
+% }
+
+% \renewcommand\labelitemi{$\triangleright$}
+
+
+%%% Перенос знаков в формулах (по Львовскому)
+\renewcommand{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$\mathsurround=0pt #1$}}{}}
+
+\usepackage[
+	backend=biber,
+	style=alphabetic,
+	sorting=ynt
+	]{biblatex}
+\usepackage{csquotes}
+% \usepackage{natbib}
+% \setcitestyle{authoryear,open={[},close={]}}
+% \bibliographystyle{apalike}
+
+
+%%% Работа с картинками
+% \usepackage{graphicx}    % Для вставки рисунков                                 UNLOCK
+% \setlength\fboxsep{3pt}  % Отступ рамки \fbox{} от рисунка                                 UNLOCK
+% \setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}                                 UNLOCK
+% \usepackage{wrapfig}     % Обтекание рисунков текстом                                 UNLOCK
+
+
+%%% Работа с таблицами
+% \usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами                                 UNLOCK
+% \usepackage{longtable}                        % Длинные таблицы                                 UNLOCK
+% \usepackage{multirow}                         % Слияние строк в таблице                                 UNLOCK
+
+
+%%% Оформление страницы
+% \usepackage{extsizes}     % Возможность сделать 14-й шрифт
+\usepackage{geometry}     % Простой способ задавать поля
+\usepackage{setspace}     % Интерлиньяж
+\usepackage{enumitem}     % Настройка окружений itemize и enumerate
+\setlist{leftmargin=25pt} % Отступы в itemize и enumerate
+
+\geometry{top=25mm}    % Поля сверху страницы
+\geometry{bottom=30mm} % Поля снизу страницы
+\geometry{left=20mm}   % Поля слева страницы
+\geometry{right=20mm}  % Поля справа страницы
+
+
+\setlength\parindent{15pt}        % Устанавливает длину красной строки 15pt
+% \linespread{1.3}                  % Коэффициент межстрочного интервала
+%\setlength{\parskip}{0.5em}      % Вертикальный интервал между абзацами
+%\setcounter{secnumdepth}{0}      % Отключение нумерации разделов
+%\setcounter{section}{-1}         % Нумерация секций с нуля
+% \usepackage{multicol}			  % Для текста в нескольких колонках                                 UNLOCK
+% \usepackage{soulutf8}             % Модификаторы начертания                                 UNLOCK
+
+
+%%% Содержаниие
+\usepackage{tocloft}
+\tocloftpagestyle{main}
+%\setlength{\cftsecnumwidth}{2.3em}
+%\renewcommand{\cftsecdotsep}{1}
+%\renewcommand{\cftsecpresnum}{\hfill}
+%\renewcommand{\cftsecaftersnum}{\quad}
+
+
+%%% Шаблонная информация для титульного листа
+\newcommand{\CourseName}{Название курса поменьше}
+\newcommand{\FullCourseNameFirstPart}{\so{БОЛЬШОЕ НАЗВАНИЕ КУРСА}}
+\newcommand{\SemesterNumber}{V}
+\newcommand{\LecturerInitials}{Иван Иванович Иванов}
+\newcommand{\CourseDate}{осень 2022}
+\newcommand{\AuthorInitials}{Павел Дуров}
+\newcommand{\GithubLink}{https://github.com/daniild71r/lectures_tex_club}
+
+
+%%% Колонтитулы
+%%% Колонтитулы
+\usepackage{titleps}
+\newpagestyle{main}{
+	\setheadrule{0.4pt}
+	\sethead
+	[\thepage][\hyperlink{intro}{\;содержание}][\thesection\ \sectiontitle]
+	{\thesubsection\ \subsectiontitle}{\hyperlink{intro}{\;содержание}}{\thepage}
+	% \setfootrule{0.4pt}                       
+	% \setfoot{Zol-LAB, \CourseDate}{center}{\thepage} 
+}
+
+% \newpagestyle{main}[\small\sffamily]{
+% \sethead[\textbf{\thepage}]
+% [\textsl{\chaptertitle}]
+% [[\toptitlemarks\thesection--\bottitlemarks\thesection]
+% {\toptitlemarks\thesection--\bottitlemarks\thesection]}
+% {\textsl{\sectiontitle}}
+% {\textbf{\thepage}}}
+
+\pagestyle{main} 
+
+
+%%% Нумерация уравнений
+\makeatletter
+\def\eqref{\@ifstar\@eqref\@@eqref}
+\def\@eqref#1{\textup{\tagform@{\ref*{#1}}}}
+\def\@@eqref#1{\textup{\tagform@{\ref{#1}}}}
+\makeatother                      % \eqref* без гиперссылки
+\numberwithin{equation}{section}  % Нумерация вида (номер_секции).(номер_уравнения)
+\mathtoolsset{showonlyrefs=true} % Номера только у формул с \eqref{} в тексте.
+
+
+%%% Гиперссылки
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\hypersetup{
+	unicode=true,            % русские буквы в раздела PDF
+	colorlinks=true,       	 % Цветные ссылки вместо ссылок в рамках
+	linkcolor=black!15!blue, % Внутренние ссылки
+	citecolor=lonestar,      % Ссылки на библиографию
+	filecolor=magenta,       % Ссылки на файлы
+	urlcolor=NavyBlue,       % Ссылки на URL
+}
+\usepackage{colors}
+%%% Графика
+\usepackage{tikz}        % Графический пакет tikz
+\usepackage{tikz-cd}     % Коммутативные диаграммы
+\usepackage{tkz-euclide} % Геометрия
+\usepackage{stackengine} % Многострочные тексты в картинках
+\usetikzlibrary{angles, babel, quotes}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem*{corollary}{Следствие}
+\newtheorem*{conjecture}{Гипотеза}
+\newtheorem*{criterion}{Критерий}
+\newtheorem*{assertion}{Утверждение}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+\newtheorem*{axiom}{Аксиома}
+\newtheorem{example}{Пример}[section]
+\newtheorem{exercise}[example]{Упражнение}
+\newtheorem{problem}{Задача}[section]
+\newtheorem*{condition}{Условие}
+\newtheorem*{algorithm}{Алгоритм}
+\newtheorem*{question}{Вопрос}
+\newtheorem*{property}{Свойство}
+\newtheorem*{assumption}{Предположение}
+\newtheorem*{reminder}{Напоминание}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Замечание}
+\newtheorem*{solution}{Решение}
+\newtheorem*{notation}{Обозначение}
+\newtheorem*{summary}{Резюме}
+\newtheorem*{acknowledgment}{Благодарность}
+\newtheorem*{case}{Случай}
+\newtheorem*{conclusion}{Вывод}

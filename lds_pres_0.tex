@@ -1,0 +1,479 @@
+\documentclass[11pt]{beamer}
+% \DeclareMathAlphabet      {\mathbfit}{OML}{cmm}{b}{it}
+% use berlin theme
+\usepackage{amsmath}
+% \usepackage{unicode-math} 
+\usetheme{Berlin}
+\begin{document}
+% \date{\today}
+\title[Laplacian LDS]{The autonomous reaction-diffusion LDS}
+% \subtitle{Subtitle (if any)}
+\author[Andrei Sultan]{Andrei Sultan}
+\institute[Institutul de Matematică şi Informatică "Vladimir Andrunachievici"]{Institutul de Matematică şi Informatică "Vladimir Andrunachievici"}
+\date{\today} % You can replace \today with a specific date if needed
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+\section{Introduction}
+\subsection{Basic definitions}
+
+\begin{frame}
+    Let $(\mathfrak{X}, \mathnormal{d})$ be a complete metric space, and let $\mathfrak{P}_{cc}(\mathfrak{X})$ denote the collection of all \textit{non-empty compact subsets} of $\mathfrak{X}$. 
+    The distance between two points $\mathnormal{x, y} \in \mathfrak{X}$ is given by
+    \[
+    \mathnormal{d}(\mathnormal{x, y}) = \mathnormal{d}(\mathnormal{y, x}).
+    \]
+    And between two sets $\mathnormal{A, B} \in \mathfrak{P}_{cc}(\mathfrak{X})$ is given by
+    \[
+        \text{dist}(\mathnormal{A, B}) := \sup_{\mathnormal{a} \in \mathnormal{A}} \text{dist}(\mathnormal{a, B}) = \sup_{\mathnormal{a} \in \mathnormal{A}} \inf_{\mathnormal{b} \in \mathnormal{B}} \mathnormal{d}(\mathnormal{a, b})
+    \]
+    
+%     Define
+%     \[
+%         \mathcal{H}(\mathnormal{A, B}) := \max \{ \text{dist}(\mathnormal{A, B}), \text{dist}(\mathnormal{B, A}) \}.
+%     \]
+    
+% This is a metric on $\mathfrak{P}_{cc}(\mathfrak{X})$ called the \textit{Hausdorff metric}.
+
+% \begin{theorem}
+%      $(\mathfrak{P}_{cc}(\mathfrak{X}), \mathcal{H})$ is a complete metric space.
+% \end{theorem}
+
+\end{frame}
+
+
+\begin{frame}
+    \begin{definition}
+        Let $\ell^2$ be the Hilbert space of real-valued square summable bi-infinite sequences
+        $\mathnormal{u} = (u_i)_{i \in \mathbb{Z}}$ with norm and inner product
+        \[
+        \|\mathnormal{u}\| := \left( \sum_{i \in \mathbb{Z}} u_i^2 \right)^{1/2}, \quad \langle \mathnormal{u}, \mathnormal{v} \rangle := \sum_{i \in \mathbb{Z}} u_i v_i \quad \text{for} \quad \mathnormal{u}, \mathnormal{v} \in \ell^2.
+        \]
+        Note that it is well-known that $\ell^2$ is a complete metric space.
+        
+
+    \end{definition}
+    
+\end{frame}
+
+% \begin{frame}
+%     \begin{definition}
+%     An autonomous dynamical system on a metric space $(\mathfrak{X}, \mathfrak{d})$ is given by mapping $\varphi : \mathbb{R} \times \mathfrak{X} \to \mathfrak{X}$, which satisfies the properties:
+%     \begin{enumerate}[i]
+%         \item \textit{initial condition:} $\varphi(0, \mathnormal{x_0}) = \mathnormal{x_0}$ for all $\mathnormal{x_0} \in \mathfrak{X}$,
+%         \item \textit{group under composition:} 
+%         \[
+%         \varphi(\mathnormal{s + t}, \mathnormal{x_0}) = \varphi(\mathnormal{s}, \varphi(\mathnormal{t}, \mathnormal{x_0})) \quad \text{for all } \mathnormal{s, t} \in \mathbb{R}, \, \mathnormal{x_0} \in \mathfrak{X},
+%         \]
+%         \item \textit{continuity:} the mapping $(\mathnormal{t}, \mathnormal{x}) \mapsto \varphi(\mathnormal{t}, \mathnormal{x})$ is continuous at all points $(\mathnormal{t_0}, \mathnormal{x_0}) \in \mathbb{R} \times \mathfrak{X}$.
+%     \end{enumerate}
+%     \end{definition}
+% \end{frame}
+
+\subsection{Autonomous semi-dynamical systems}
+\begin{frame}
+    \begin{definition}
+        An \textbf{autonomous semi-dynamical system} on a metric space $(\mathfrak{X}, \mathfrak{d})$ is given by a mapping $\varphi \colon \mathbb{R}^+ \times \mathfrak{X} \to \mathfrak{X}$, which satisfies the properties:
+        \begin{enumerate}[i]
+            \item \textit{initial condition:} 
+                $\varphi(0, x_0) = x_0$ for all $x_0 \in \mathfrak{X}$,
+                \item \textit{semi-group under composition:} 
+                $\varphi(s + t, x_0) = \varphi(s, \varphi(t, x_0))$ for all $s, t \in \mathbb{R}^+$, $x_0 \in \mathfrak{X}$,
+                \item \textit{continuity:}
+                the mapping $(t, x) \mapsto \varphi(t, x)$ is continuous at all points $(t_0, x_0) \in \mathbb{R}^+ \times \mathfrak{X}$.
+        \end{enumerate}
+        \end{definition}
+\end{frame}
+
+
+
+% \begin{frame}
+%     \begin{definition}
+        
+%     An autonomous \textbf{semi-dynamical} dynamical system on a metric space $(\mathcal{X}, d_{\mathcal{X}})$ is given by mapping $\varphi : \mathbb{R}^+ \times \mathcal{X} \rightarrow \mathcal{X}$, which satisfies the properties:
+
+% \begin{itemize}
+%     \item[(i)] \textit{initial condition}: $\varphi(0, x_0) = x_0$ for all $x_0 \in \mathcal{X}$,
+%     \item[(ii)] \textit{semi-group under composition}:
+%     \[
+%     \varphi(s + t, x_0) = \varphi(s, \varphi(t, x_0)) \quad \text{for all } s, t \in \mathbb{R}^+, \, x_0 \in \mathcal{X},
+%     \]
+%     \item[(iii)] \textit{continuity}: the mapping $(t, x) \mapsto \varphi(t, x)$ is continuous at all points $(t_0, x_0) \in \mathbb{R}^+ \times \mathcal{X}$.
+% \end{itemize}
+% \end{definition}
+
+% \end{frame}
+
+\begin{frame}
+    \begin{definition} 
+        A semi-dynamical
+         system $\{\varphi(t)\}_{t \geq 0}$ on a 
+         complete metric space $(\mathfrak{X}, \mathfrak{d})$ is 
+         said to be \textbf{asymptotically compact} if, 
+         for every sequence $\{t_k\}_{k \in \mathbb{N}}$ 
+         in $\mathbb{R}^+$ with $t_k \rightarrow \infty$ 
+         as $k \rightarrow \infty$ and every bounded 
+         sequence $\{x_k\}_{k \in \mathbb{N}}$ in 
+         $\mathfrak{X}$, the sequence 
+         $\{\varphi(t_k, x_k)\}_{k \in \mathbb{N}}$ has a 
+         convergent subsequence.
+    \end{definition}
+    \begin{definition}
+    A set $B_0 \subset \mathfrak{X}$ is said to be \textbf{absorbing} for a dynamical system $(\mathfrak{X}, \varphi)$ if for any bounded set $B$ in $\mathfrak{X}$ there exists $t_0 = t_0(B)$ such that $\varphi(t, B) \subset B_0$ for every $t \geq t_0$.
+    \end{definition}
+
+\end{frame}
+
+\begin{frame}
+    A bounded closed set $A_1 \subseteq X$ is called a \textbf{global attractor} for a dynamical system $(\mathfrak{X}, \varphi)$, if
+\begin{enumerate}
+\item $A_1$ is an invariant set, i.e., $\varphi(t, A_1) = A_1$ for any $t > 0$;
+
+\item the set $A_1$ uniformly attracts all trajectories starting in bounded sets,
+
+i.e., for any bounded set $B$ from $\mathfrak{X}$
+
+\end{enumerate}
+$$\limsup_{t \to \infty} \left\{ \mathrm{dist}(\varphi(t, y), A_1) : y \in B \right\} = 0.$$
+\end{frame}
+
+\begin{frame}
+    \begin{Theorem} Let $\{\varphi(t)\}_{t \geq 0}$ be an autonomous semi-dynamical system on a complete metric space $(\mathfrak{X}, \mathfrak{d})$ which is asymptotically compact and has a closed and bounded absorbing set $Q \subset \mathfrak{X}$. Then $\varphi$ has an attractor $A$, which is contained in $Q$ and is given by
+        \[
+        A = \bigcap_{t \geq 0} \overline{\bigcup_{s \geq t} \varphi(s, Q)}.
+        \]
+        
+    \end{Theorem}
+    
+\end{frame}
+
+\begin{frame}
+    \textbf{Asymptotic tails property: autonomous systems} 
+    Let $\varphi = (\varphi_i)_{i \in \mathbb{Z}}$ be an autonomous semi-dynamical system on the Hilbert space $(\ell^2, || \cdot ||)$ and let $B$ be a positively invariant, closed and bounded subset of $\ell^2$, which is $\varphi$-positive invariant. Then $\varphi$ is said to satisfy an asymptotic tails property in $B$ if for every $\epsilon > 0$ there exist $T(\epsilon) > 0$ and $I(\epsilon) \in \mathbb{N}$ such that 
+    
+    $$\sum_{|i| > I(\epsilon)} |\varphi_i(t, x_0)|^2 \leq \epsilon \quad \forall x_0 \in B \text{ and } t \geq T(\epsilon).$$
+
+\begin{lemma}[2.5]
+    Let Assumption about asymptotic tails property hold.
+    Then the semi-dynamical system \(\phi\) is asymptotically compact in \(B\).
+\end{lemma}
+\end{frame}
+
+% \begin{frame}
+%     \begin{definition}
+%         A set-valued autonomous dynamical system on a metric space $(\mathfrak{X}, \mathnormal{d}_{\mathfrak{X}})$ is defined in terms of an attainability set mapping $(\mathnormal{t, x}) \mapsto \mathnormal{\Phi}(\mathnormal{t, x})$ on $\mathbb{R}^+ \times \mathfrak{X}$ satisfying
+%         \begin{enumerate}[i)]
+%             \only<1>{
+%             \item \textit{compactness:} $\mathnormal{\Phi}(\mathnormal{t, x_0})$ is a non-empty compact subset of $\mathfrak{X}$ for all $(\mathnormal{t, x_0}) \in \mathbb{R}^+ \times \mathfrak{X}$,
+%             \item \textit{initial condition:} $\mathnormal{\Phi}(0, \mathnormal{x_0}) = \{ \mathnormal{x_0} \}$ for all $\mathnormal{x_0} \in \mathfrak{X}$,
+%             \item \textit{semi-group:} $\mathnormal{\Phi}(\mathnormal{s + t, x_0}) = \mathnormal{\Phi}(\mathnormal{s}, \mathnormal{\Phi}(\mathnormal{t, x_0}))$ for all $\mathnormal{t, s} \in \mathbb{R}^+$ and all $\mathnormal{x_0} \in \mathfrak{X}$,
+%             \item \textit{upper semi-continuity in initial conditions:} $(\mathnormal{t, x}) \mapsto \mathnormal{\Phi}(\mathnormal{t, x})$ is upper semi-continuous in $(\mathnormal{t, x}) \in \mathbb{R}^+ \times \mathfrak{X}$ with respect to the Hausdorff semi-distance $\text{dist}_{\mathfrak{X}}$, i.e.,
+%             \[
+%             \text{dist}_{\mathfrak{X}}(\mathnormal{\Phi}(\mathnormal{t, x}), \mathnormal{\Phi}(\mathnormal{t_0, x_0})) \to 0 \quad \text{as} \quad (\mathnormal{t, x}) \to (\mathnormal{t_0, x_0}) \quad \text{in} \quad \mathbb{R}^+ \times \mathfrak{X},
+%             \]}
+%             \only<2>{
+%             \setcounter{enumi}{4}
+%             \item \textit{continuity:} the mapping $\mathnormal{t} \mapsto \mathnormal{\Phi}(\mathnormal{t, x_0})$ is continuous in $\mathnormal{t} \in \mathbb{R}^+$ with respect to the Hausdorff metric $\mathcal{H}_{\mathfrak{X}}$ uniformly in $\mathnormal{x_0}$ in compact subsets $\mathnormal{B} \in \mathfrak{P}_{cc}(\mathfrak{X})$, i.e.,
+%             \[
+%             \sup_{\mathnormal{x_0} \in \mathnormal{B}} \mathcal{H}_{\mathfrak{X}}(\mathnormal{\Phi}(\mathnormal{t, x_0}), \mathnormal{\Phi}(\mathnormal{t_0, x_0})) \to 0 \quad \text{as} \quad \mathnormal{t} \to \mathnormal{t_0} \quad \text{in} \quad \mathbb{R}^+.
+%             \]}
+%         \end{enumerate}
+%         \end{definition}        
+        
+% \end{frame}
+
+% \begin{frame}
+%     \begin{definition}
+%         A process on a metric space $(\mathfrak{X}, \mathnormal{d}_{\mathfrak{X}})$ is a mapping $\mathnormal{\psi} : \mathbb{R}^2_{\geq 0} \times \mathfrak{X} \to \mathfrak{X}$ with the following properties:
+%         \begin{enumerate}[i)]
+%             \item \textit{initial condition:} $\mathnormal{\psi}(t_0, t_0, \mathnormal{x_0}) = \mathnormal{x_0}$ for all $\mathnormal{x_0} \in \mathfrak{X}$ and $\mathnormal{t_0} \in \mathbb{R}$.
+%             \item \textit{two-parameter semi-group property:}
+%             \[
+%             \mathnormal{\psi}(t_2, t_0, \mathnormal{x_0}) = \mathnormal{\psi}(t_2, t_1, \mathnormal{\psi}(t_1, t_0, \mathnormal{x_0}))
+%             \]
+%             for all $(t_1, t_0), (t_2, t_1) \in \mathbb{R}^2_{\geq 0}$ and $\mathnormal{x_0} \in \mathfrak{X}$.
+%             \item \textit{continuity:} the mapping $(t, t_0, \mathnormal{x_0}) \mapsto \mathnormal{\psi}(t, t_0, \mathnormal{x_0})$ is continuous.
+%         \end{enumerate}
+%         \end{definition}
+            
+% \end{frame}
+
+% \begin{frame}
+
+%     \begin{definition}
+%         For an autonomous system, a process reduces to
+%         \[
+%         \mathnormal{\psi}(t, t_0, \mathnormal{x_0}) = \mathnormal{\varphi}(t - t_0, \mathnormal{x_0}),
+%         \]
+%         since the solutions depend only on the elapsed time $t - t_0$, i.e., just one parameter instead of independently on the actual time $t$ and the initial time $t_0$, i.e., two parameters.
+%     \end{definition}
+    
+        
+% \end{frame}
+
+
+\section{LDS Problem}
+\begin{frame}
+    Lattice dynamical systems (LDS) are essentially infinite dimensional systems of ordinary differential equations (ODEs). In particular, they can be formulated as ordinary differential equations on a Hilbert or Banach space of bi-infinite sequences.
+    LDS may arise from discretisation of continuum models or as infinite dimensional counterparts of finite ODE models.
+    A classical lattice dynamical system is based on a \textbf{reaction-diffusion equation}
+\[
+\frac{\partial u}{\partial t}=\nu\frac{\partial^{2}u}{\partial x^{2}}-\lambda u+f(u)+g(x),
+\]
+where $\lambda$ and $\nu$ are positive constants, on a one-dimensional domain $\mathbb{R}$. It is obtained by using a central difference quotient to discretise the Laplacian. Setting the stepsize scaled to equal 1 leads to the infinite dimensional system of ordinary differential equations
+\[
+\frac{du_{i}}{dt}=\nu(u_{i-1}-2u_{i}+u_{i+1})-\lambda u_{i}+f(u_{i})+g_{i} \quad i\in\mathbb{Z},
+\] 
+\end{frame}
+\begin{frame}
+    Consider the autonomous LDS
+    \[
+    \frac{d\mathnormal{u_i}}{d\mathnormal{t}} = \mathnormal{\nu} (\mathnormal{u_{i-1}} - 2\mathnormal{u_i} + \mathnormal{u_{i+1}}) + \mathnormal{f}(\mathnormal{u_i}) + \mathnormal{g_i}, \quad \mathnormal{i} \in \mathbb{Z}\quad (0)
+    \]
+    in the space $\ell^2$, which will be investigated here under the following assumptions.
+        
+\end{frame}
+
+\subsection{Assumptions}
+\begin{frame}
+    \begin{block}{Assumption 1}
+        The function $\mathnormal{f} : \mathbb{R} \to \mathbb{R}$ is a continuously differentiable function satisfying
+        \[
+        \mathnormal{f(s)}\mathnormal{s} \leq -\alpha \mathnormal{s}^2 \quad \forall \, \mathnormal{s} \in \mathbb{R},
+        \]
+        for some $\alpha > 0$ with bounded derivative $\mathnormal{f'}$.
+
+
+        % \textbf{Example:} $\mathnormal{f(s)} = -\mathnormal{s}^3 - \mathnormal{s}$.
+    \end{block}
+        
+    \begin{block}{Assumption 2}
+    Let $\boldsymbol{g} = (\mathnormal{g_i})_{i \in \mathbb{Z}} \in \ell^2$.
+    \end{block}
+\end{frame}
+
+
+\begin{frame}
+    \begin{definition}
+        Define the operator $\Lambda : \ell^2 \to \ell^2$ by
+        \[
+        (\Lambda \mathbf{u})_i = u_{i-1} - 2 u_i + u_{i+1}, \quad i \in \mathbb{Z}
+        \]
+        and the operators $\mathbf{D}^+, \mathbf{D}^- : \ell^2 \to \ell^2$ by
+        \[
+        (\mathbf{D}^+ \mathbf{u})_i = u_{i+1} - u_i, \quad (\mathbf{D}^- \mathbf{u})_i = u_{i-1} - u_i, \quad i \in \mathbb{Z}.
+        \]
+        It is straightforward to check that
+        \[
+        -\Lambda = \mathbf{D}^+ \mathbf{D}^- = \mathbf{D}^- \mathbf{D}^+ \quad \text{and} \quad \langle \mathbf{D}^- \mathbf{u}, \mathbf{v} \rangle = \langle \mathbf{u}, \mathbf{D}^+ \mathbf{v} \rangle \quad \forall \mathbf{u}, \mathbf{v} \in \ell^2,
+        \]
+        and hence $\langle \Lambda \mathbf{u}, \mathbf{u} \rangle = - \|\mathbf{D}^+ \mathbf{u}\|^2 \leq 0$ for any $\mathbf{u} \in \ell^2$.
+        $\Lambda$ operator is a linear, bounded and nonpositive operator.
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    The lattice system (0) can be written as an ODE
+\[ \frac{du}{dt} = \nu \Lambda u + F(u) + g \quad (*)\]
+on $\ell^2$, where $g = (g_i)_{i \in \mathbb{Z}}\in \ell^2 $, $F: \ell^2 \to \ell^2$ is given component wise by $F_i(u) := f(u_i)$ for some continuously differentiable globally Lipschitz function $f: \mathbb{R} \to \mathbb{R}$ with $f(0) = 0$. It follows that the function on the right side of the infinite dimensional ODE \((*)\) maps $\ell^2$ into itself and is globally Lipschitz on $\ell^2$.
+\end{frame}
+
+\begin{frame}
+\textbf{Theorem 1.2 (Global).} Let the function $f(t, x):\mathbb{R}\times\mathfrak{B}\to\mathfrak{B}$, continuous with respect to $t$, satisfy the following conditions for $t \in [a, b]$, $x \in \mathfrak{B}$:
+\begin{align}
+\|f(t, x)\| &\leq M_1 + M_0\|x\|,  \\
+\|f(t, x_2) - f(t, x_1)\| &\leq M_2\|x_2 - x_1\|, 
+\end{align}
+where $M_0$, $M_1$, and $M_2$ are constants.
+Then, for any $x_0 \in \mathfrak{B}$ and $t_0 \in [a, b]$, the differential equation $\frac{dx}{dt} = f(t, x)$ has a unique solution $x = \varphi(t)$ on the entire interval $[a, b]$, satisfying the initial condition $\varphi(t_0)=x_0$.
+
+\end{frame}
+
+\begin{frame}
+Under Theorem 1.2 conditions, equation \((*)\) generates a semigroup dynamical system $(\ell^{2},\varphi)$ in the space $\ell^{2}$, where $\varphi(t,x):=u(t,x)$ and $u(t,x)$ is the solution of equation \((*)\) with the initial condition $u(0,x)=x$ ($x\in \ell^{2}$).
+\end{frame}
+
+% \begin{frame}
+%     For any $\boldsymbol{u} = (\mathnormal{u_i})_{i \in \mathbb{Z}} \in \ell^2$, the discrete Laplace operator $\Lambda$ is defined from $\ell^2$ to $\ell^2$ component-wise by
+% \[
+% (\Lambda \boldsymbol{u})_i = \mathnormal{u_{i-1}} - 2\mathnormal{u_i} + \mathnormal{u_{i+1}}, \quad \mathnormal{i} \in \mathbb{Z}.
+% \]
+% \end{frame}
+
+\subsection{Existence of a global attractor}
+\begin{frame}{LDS Problem}
+   \begin{theorem}
+       Suppose that Assumptions are satisfied. The autonomous semi-dynamical system $\{\mathnormal{\varphi}(t)\}_{t \geq 0}$ generated by the ODE \((*)\) on $\ell^2$ has a global attractor $\mathcal{A}$ in $\ell^2$.
+   \end{theorem}
+   \[ \frac{du}{dt} = \nu \Lambda u + F(u) + g \quad (*)\]
+\end{frame}
+
+\section{Proof of the main result}
+\subsection{ Existence of an absorbing set}
+\begin{frame}
+    Taking the inner product of equation \((*)\) with $\boldsymbol{u}$ gives
+    \[
+    \frac{d}{dt} \|\boldsymbol{u}\|^2 = 2\mathnormal{\nu} \langle \Lambda \boldsymbol{u}, \boldsymbol{u} \rangle + 2 \langle \mathnormal{F}(\boldsymbol{u}), \boldsymbol{u} \rangle + 2 \langle \boldsymbol{g}, \boldsymbol{u} \rangle
+    \]
+    \[
+    \leq 2 \sum_{i \in \mathbb{Z}} \mathnormal{u_i} \mathnormal{f(u_i)} + 2 \sum_{i \in \mathbb{Z}} \mathnormal{g_i} \mathnormal{u_i} \leq -\alpha \|\boldsymbol{u}\|^2 + \frac{\|\boldsymbol{g}\|^2}{\alpha},
+    \]
+    Since Assumption 1 gives \(2\sum_{i\in\mathbb{Z}}\mathnormal{u_i} f(u_i) \leq -2\alpha\|\boldsymbol{u}\|^2\)
+    and Young's inequality gives \(2\sum_{i\in\mathbb{Z}}\mathnormal{g_i u_i}\leq\alpha\|\boldsymbol{u}\|^2+\|\boldsymbol{g}\|^2/\alpha\). Hence, Gronwall's lemma implies that
+    \[
+    \|\boldsymbol{u}(t)\|^2 \leq \|\boldsymbol{u}_0\|^2 e^{-\alpha t} + \frac{\|\boldsymbol{g}\|^2}{\alpha^2} \left(1 - e^{-\alpha t}\right), \quad t \geq 0 \quad (3.7)
+    \]
+    
+    Define the closed ball $Q$ in $\ell^2$ by
+    \[
+    Q := \left\{ \boldsymbol{u} \in \ell^2 : \|\boldsymbol{u}\|^2 \leq R^2 := 1 + \frac{\|\boldsymbol{g}\|^2}{\alpha^2} \right\}.
+    \]
+    
+\end{frame}
+
+\begin{frame}
+    The estimate then implies that $Q$ is an absorbing set for the autonomous semi-dynamical system $\varphi$. In fact, for any $\boldsymbol{u_0} \in B$, which is a bounded set in $\ell^2$, it is straightforward to check that
+\[
+\varphi(t, B) \subset Q \quad \forall t \geq \frac{2}{\alpha} \ln \|B\|,
+\]
+where $\|B\| := \sup_{\boldsymbol{u} \in B} \|\boldsymbol{u}\|$.
+
+Moreover, for every $\boldsymbol{u_0} \in Q$, by estimate (3.7) we have
+\[
+\|\varphi(t, \boldsymbol{u_0})\|^2 \leq R^2 e^{-\alpha t} + R^2 (1 - e^{-\alpha t}) = R^2,
+\]
+ 
+\end{frame}
+
+\subsection{Asymptotic tails property}
+\begin{frame}
+    In order to establish the asymptotic compactness property in Assumption 2 for the autonomous semi-dynamical system $\{\varphi(t)\}_{t \geq 0}$ in $\ell^2$, the asymptotic tails property needs to be shown to hold.
+    Consider a smooth function $\xi : \mathbb{R}^+ \to [0, 1]$ satisfying
+    \[
+    \xi(s) =
+    \begin{cases}
+    0, & 0 \leq s \leq 1, \\
+    \in [0, 1], & 1 \leq s \leq 2, \\
+    1, & s \geq 2,
+    \end{cases}
+    \]
+    and note that there exists a constant $C_0$ such that $|\xi'(s)| \leq C_0$ for all $s \geq 0$. Notice that this function $\xi$ or a similar function will be used repeatedly throughout this book. Then for a fixed $k \in \mathbb{N}$ (its value will be specified later), define
+    \[
+    \xi_k(s) = \xi\left(\frac{s}{k}\right) \quad \text{for all} \quad s \in \mathbb{R}.
+    \]
+  
+\end{frame}
+
+\begin{frame}
+        
+    Given $\boldsymbol{u} \in \ell^2$, define $\boldsymbol{v} \in \ell^2$ component-wise as
+    \[
+    v_i := \xi_k(|i|) u_i \quad i \in \mathbb{Z}.
+    \]
+    
+    Taking the inner product of equation \((*)\) with $\boldsymbol{v}$ gives
+    \[
+    \frac{d}{dt} \langle \boldsymbol{u}, \boldsymbol{v} \rangle + \nu \langle \mathnormal{D}^+ \boldsymbol{u}, \mathnormal{D}^+ \boldsymbol{v} \rangle = \langle \mathnormal{F}(\boldsymbol{u}), \boldsymbol{v} \rangle + \langle \boldsymbol{g}, \boldsymbol{v} \rangle.
+    \]
+    that is
+    \[
+    \frac{d}{dt} \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2 + 2\mathnormal{\nu} \langle \mathnormal{D}^+ \boldsymbol{u}, \mathnormal{D}^+ \boldsymbol{v} \rangle 
+    = 2 \sum_{i \in \mathbb{Z}} \xi_k(|i|) u_i \mathnormal{f}(u_i) + 2 \sum_{i \in \mathbb{Z}} \xi_k(|i|) g_i u_i
+
+    \quad (3.9)
+    \]
+
+\end{frame}
+
+\begin{frame}
+        
+    Each term in equation will now be estimated. First,
+    \[
+    \langle \mathnormal{D}^+ \boldsymbol{u}, \mathnormal{D}^+ \boldsymbol{v} \rangle = \sum_{i \in \mathbb{Z}} (u_{i+1} - u_i)(v_{i+1} - v_i)
+    \]
+    \[
+    = \sum_{i \in \mathbb{Z}} (u_{i+1} - u_i) \left[ (\xi_k(|i+1|) - \xi_k(|i|)) u_{i+1} + \xi_k(|i|)(u_{i+1} - u_i) \right]
+    \]
+    \[
+    = \sum_{i \in \mathbb{Z}} (\xi_k(|i+1|) - \xi_k(|i|)) (u_{i+1} - u_i) u_{i+1} + \sum_{i \in \mathbb{Z}} \xi_k(|i|)(u_{i+1} - u_i)^2
+    \]
+    \[
+    \geq \sum_{i \in \mathbb{Z}} (\xi_k(|i+1|) - \xi_k(|i|)) (u_{i+1} - u_i) u_{i+1}.
+    \]
+    
+\end{frame}
+
+\begin{frame}
+    Since
+\[
+\sum_{i \in \mathbb{Z}} \left( \xi_k(|i+1|) - \xi_k(|i|) \right) (u_{i+1} - u_i) u_{i+1} \leq \sum_{i \in \mathbb{Z}} \frac{1}{k} |\xi'(s_i)| \cdot |u_{i+1} - u_i| \cdot |u_i| + |u_{i+1}|,
+\]
+for some $s_i$ between $|i|$ and $|i+1|$, and
+\[
+\sum_{i \in \mathbb{Z}} |\xi'(s_i)| |u_{i+1} - u_i| |u_{i+1}| \leq C_0 \sum_{i \in \mathbb{Z}} \left( |u_{i+1}|^2 + |u_i| |u_{i+1}| \right) \leq 4C_0 \|\boldsymbol{u}\|^2.
+\]
+
+Then it follows that for all $\boldsymbol{u} \in Q$ and $\boldsymbol{v} \in \ell^2$ defined component-wise as $v_i := \xi_k(|i|) u_i$ for $i \in \mathbb{Z}$,
+\[
+\langle \mathnormal{D}^+ \boldsymbol{u}, \mathnormal{D}^+ \boldsymbol{v} \rangle \geq - \frac{4C_0 \|Q\|^2}{k}  \quad (3.10)
+\]
+where $\|Q\| := \sup_{\boldsymbol{u} \in Q} \|\boldsymbol{u}\|$.
+
+\end{frame}
+
+\begin{frame}
+    On the other hand, by Assumption 1,
+\[
+2 \sum_{i \in \mathbb{Z}} \xi_k(|i|) u_i f(u_i) \leq -2 \alpha \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2
+\]
+and by Young's inequality
+\[
+2 \sum_{i \in \mathbb{Z}} \xi_k(|i|) g_i u_i \leq \alpha \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2 + \frac{1}{\alpha} \sum_{i \in \mathbb{Z}} \xi_k(|i|) |g_i|^2.
+\]
+Thus,
+\[
+2 \sum_{i \in \mathbb{Z}} \xi_k(|i|) u_i f(u_i) + 2 \sum_{i \in \mathbb{Z}} \xi_k(|i|) g_i u_i 
+
+\leq -\alpha \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2 + \frac{1}{\alpha} \sum_{|i| \geq k} |g_i|^2 \quad (3.11).
+\]
+
+Using the estimates (3.10) and (3.11) in equation (3.9) gives
+\[
+\frac{d}{dt} \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2 + \alpha \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2 \leq \nu \frac{4C_0 \|Q\|^2}{k} + \frac{1}{\alpha} \sum_{|i| \geq k} |g_i|^2 \quad (3.12).
+\]
+
+\end{frame}
+
+\begin{frame}
+    The inequality (3.12) along with the relation above give
+\[
+\frac{d}{dt} \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2 + \alpha \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i|^2 \leq \epsilon.
+\]
+
+Then, Gronwall's lemma implies that
+\[
+\sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i(t, \boldsymbol{u_0})|^2 \leq e^{-\alpha t} \sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_{0,i}|^2 + \frac{\epsilon}{\alpha} \leq e^{-\alpha t} \|\boldsymbol{u_0}\|^2 + \frac{\epsilon}{\alpha}.
+\]
+
+Hence for every $\boldsymbol{u_0} \in Q$,
+\[
+\sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i(t, \boldsymbol{u_0})|^2 \leq e^{-\alpha t} \|Q\|^2 + \frac{\epsilon}{\alpha},
+\]
+
+and therefore
+\[
+\sum_{i \in \mathbb{Z}} \xi_k(|i|) |u_i(t, \boldsymbol{u_0})|^2 \leq \frac{2 \epsilon}{\alpha}, \quad \text{for} \quad t \geq T(\epsilon) := \frac{1}{\alpha} \ln \frac{\alpha \|Q\|^2}{\epsilon}.
+\]
+
+\end{frame}
+
+\begin{frame}
+    This is the desired asymptotic tails property. The asymptotic compactness in $\ell^2$ of $\varphi$ in the absorbing set $Q$ then follows from Lemma 2.5. This completes the proof of the Theorem.
+
+\end{frame}
+\end{document}

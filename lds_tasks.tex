@@ -1,0 +1,85 @@
+% !TEX root = lds_tasks.tex
+\input{preamble2.tex}
+% hello, there!
+
+\addbibresource{biblio.bib}
+\title{LDS tasks}
+\begin{document}
+\maketitle
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+\section{Almost periodic motions of LDS}
+\subsection{\(\sup_{\|u\|=1} (\Lambda u, u)\)}
+\begin{lemma}
+\(\sup_{\|u\|=1} (\Lambda u, u) < 0\).
+\end{lemma} 
+\begin{proof}
+    \begin{align*}
+        \sup_{\|u\|=1} (\Lambda u, u) &= \sup_{\|u\|=1} \sum_{i} u_{i+1} u_i - 2 u_i^2 + u_{i-1} u_i \\
+        &= \sup_{\|u\|=1} \sum_{i} u_{i+1} u_i - 2 \sum_i u_i^2 + \sum_i u_{i-1} u_i \\
+        &= \sup_{\|u\|=1} 2 \sum_{i} u_{i+1} u_i - 2 \sum_i u_i^2 \\
+        &= \sup_{\|u\|=1} - \left( \sum_i u_i^2 + \sum_i u_{i+1}^2 - 2\sum_{i} u_{i+1} u_i \right) \\
+        &= \sup_{\|u\|=1} - \sum_i (u_i - u_{i+1})^2 < 0.
+    \end{align*}
+\end{proof}
+\subsection{Lagrange stability criterion for \(f\in C(\R,\ell^2)\)}
+\begin{lemma}
+Let $(M,d)$ be a metric space. A subset $A\subset M$ is totally bounded if and only if
+\[
+  \forall\,\varepsilon>0\;\;\exists\ \text{compact }K\subset M:\quad
+  \sup_{x\in A}d(x,K)<\varepsilon.
+\]
+\end{lemma}
+\begin{lemma}
+    \(f\inC(\R,\ell^2)\)is Largange stable if and only if the set
+    \begin{enumerate}
+        \item functions \(\{f_i\}\) are equicontinuous, e.g. \(\forall \varepsilon > 0 \exists \delta > 0\) such that \(|f_i(t_1) - f_i(t_2)| < \varepsilon,  \forall i \in \Z, |t_1-t_2| < \delta\) where \(t_1,t_2 \in \R\);
+        \item functions \(\{f_i\}\) are uniformly bounded, e.g. \(\exists M > 0\) such that \(|f_i(t)| < M, \forall i \in \Z, \forall t \in \R\);
+        \item \(\forall \eps > 0 \exists n_\eps \in \N : \sum_{|i|\geq n_\eps} |f_i(t)|^2 < \eps, \forall t \in \R\)
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    A set \(\Sigma_f\coloneqq\{f^h\mid h\in\R\}\) is totally bounded if and only if
+    \(\forall\eps>0 \exists\) compact set \(C : d(f, C)<\eps, \forall f\in\Sigma_f\).
+    
+    Then, for \(n\in\mathbb{N}\) consider the projection
+    \[
+    P_n\colon C(\R, \ell^2) \to C(\R, \ell^2),\qquad
+    [P_n(f)]_m =
+    \begin{cases}
+    f_m(t), & m \le n,\\
+    0,   & m > n.
+    \end{cases}
+    \]
+    
+    For the given \(\Sigma_f\) and \(\varepsilon>0\), choose \(n_\varepsilon\) such that
+    \[
+    \sum_{n=n_\varepsilon}^\infty \lvert f^h_n\rvert^2 < \frac{\varepsilon}{2}
+    \quad \forall h\in \R.
+    \]
+    Then let \(C = P_{n_\varepsilon}(\Sigma_f)\).
+    \(C\) is a compact set because it suffices Arzelà–Ascoli theorem;
+    indeed \(f^h\) hence \(P_{n_\varepsilon}(\Sigma_f)\) is uniformly bounded and equicontinuous.
+    By choice of \(n_\varepsilon\), we have
+    \[
+    d(f^h, C) = \|\,f^h - P_{n_\varepsilon}(f^h)\|_2 < \varepsilon
+    \quad \forall h\in \R,
+    \]
+    So the criterion is satisfied, hence \(\Sigma_f\) is totally bounded.
+\end{proof}
+\subsection{Example of Lipschitz continuous function}
+\begin{example}
+    Let \(F\in C(\R, \R)\) be a function satisfying the Lipschitz condition:
+    \((F(x_1)-F(x_2))(x_1-x_2) \leq -\alpha |x_1-x_2|^2\quad \alpha>0 \forall x_1,x_2\in\R\).
+    To prove that the function \(\Phi:\ell^2\to\ell^2\) defined by
+    \([\Phi u]_i=F(u_i)\forall i\in\Z\) satisfies the condition:
+    \(\langle\Phi(u_1)-\Phi(u_2), u_1-u_2\rangle_{\ell^2} \leq -\alpha \|u_1-u_2\|^2_{\ell^2}\)
+\end{example}
+\begin{proof}
+    \begin{align*}
+        \langle\Phi(u_1)-\Phi(u_2), u_1-u_2\rangle_{\ell^2} &= \sum_{i\in\Z} (F(u_{1,i})-F(u_{2,i}))(u_{1,i}-u_{2,i}) \\
+        &\leq -\alpha \sum_{i\in\Z} |u_{1,i}-u_{2,i}|^2 = -\alpha \|u_1-u_2\|^2_{\ell^2}.
+    \end{align*}
+\end{proof}
+\end{document}

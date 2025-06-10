@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsfonts}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newcommand{\titleart}[1]{\bigskip\begin{center}\large
+\textbf{#1}\end{center}\vspace{-6mm}}
+\newcommand{\autorart}[1]{\begin{center}\large
+\textsf{#1}\end{center} \vspace{-6mm}}
+\newcommand{\coord}[1]{\begin{center} \small
+\textit{#1}\end{center} \vspace{-6mm}}
+\newcommand{\mail}[1]{\begin{center} \small
+\texttt{#1}\end{center} \normalsize}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+\begin{document}
+
+
+\titleart{ALMOST PERIODIC SOLUTIONS OF LATTICE DYNAMICAL SYSTEMS WITH MONOTONE NONLINEARITY}
+
+% \autorart{David Cheban\index{Cheban D. N.}, Andrei
+% Sultan\index{Sultan A. A.} 
+\autorart{David Cheban\index{Cheban D. N.},\\
+         Andrei Sultan\index{Sultan A. A.}
+\footnote{{\it Sultan Andrei}: A. A.
+Sultan}}
+
+\coord{Vladimir Andrunachievici Institute of Mathematics and
+Computer Science, Moldova State University, Chi\c{s}in\u{a}u,
+Republic of Moldova}
+
+\mail{ david.ceban@usm.md, andrew15sultan@gmail.com}
+
+% \addc{Initials. Last name of the first author, Initials. Last name of the second author}{ Title of the abstract}
+% \stopcr
+
+\medskip
+
+
+
+Let $\mathbb R$ (respectively, $\mathbb Z$) be the set of all real
+(respectively, integer) numbers and $l_{2}$ be the Hilbert space of
+all sequences $\xi =(\xi_{i})_{i\in\mathbb Z}$ ($\xi_{i}\in
+\mathbb R$ for any $i\in \mathbb Z$) with the property
+$\sum\limits_{i\in \mathbb Z}|\xi_{i}|^{2}<\infty$ equipped with
+the scalar product $\langle \xi,\eta\rangle :=\sum\limits_{i\in
+\mathbb Z}\xi_{i}\eta_{i}$. Denote by $C(\mathbb R,l_{2})$ the
+family of all continuous functions $\varphi :\mathbb R\to l_{2}$
+equipped with the compact-open topology and $(C(\mathbb
+R,l_{2}),\mathbb R,\sigma)$ the shift dynamical system on the
+space $C(\mathbb R,l_{2})$.
+
+A subset $A\subset \mathbb R$ is called relatively dense if there
+exists a positive number $l$ such that $[a,a+l]\bigcap \mathbb R
+\not= \emptyset$, \(\forall a \in \mathbb R\).
+
+\textbf{Definition.} A function $\varphi\in C(\mathbb R,l_{2})$ is
+said to be almost periodic [1] if for any $\varepsilon
+>0$ there exists a relatively dense subset $\mathcal
+P(\varepsilon)$ such that
+\|\varphi(t+\tau)-\varphi(t)\|_{l_{2}}<\varepsilon
+% $|\varphi(t+\tau)-\varphi(t)|_{\ell_2}<\varepsilon$ for any $t\in \mathbb
+% R$.
+
+In this talk we study the almost periodic solutions of the systems
+\begin{equation}\label{eqI1}
+u_{i}'=\nu (u_{i-1}-2u_i+u_{i+1})-\lambda u_{i}+F(u_i)+f_{i}(t)\
+(i\in \mathbb Z),
+\end{equation}
+where $\lambda, \nu >0$, $F\in C(\mathbb R, \mathbb R)$ and $f\in
+C(\mathbb R,\ell_{2})$ ($f(t):=(f_{i}(t))_{i\in \mathbb Z}$ for
+any $t\in \mathbb R$) is an almost periodic function.
+
+\textbf{Theorem 1.} Suppose that the following conditions hold:
+\begin{enumerate}
+\item the function $f\in C(\mathbb R,l_{2})$ is almost periodic;
+\item the function $F$ possesses the following
+properties: \begin{enumerate} \item it is locally Lipschitzian;
+\item there exists a positive number $\alpha$ such that $F(s)s\le
+-\alpha s^{2}$ for any $s\in \mathbb R$; \item the function $F$ is
+monotone [1], i.e., there exists a positive number $\beta$ such
+that $(F(x_1)-F(x_2))(x_1-x_2)\le -\beta |x_1-x_2|^{2}$ for any
+$x_1,x_2\in \mathbb R$.
+\end{enumerate}
+\end{enumerate}
+
+Then the equation (\ref{eqI1}) has a unique almost periodic
+solution.
+
+\medskip
+\textbf{Funding.} This research was supported by the State Program
+of the Republic of Moldova "Monotone Nonautonomous Dynamical
+Systems (24.80012.5007.20SE)" and partially was supported by the
+Institutional Research Program 011303 "SATGED", Moldova State
+University.
+
+\medskip
+\textbf{ORCID (D. Cheban):} https://orcid.org/0000-0002-2309-3823
+
+
+\textbf{ORCID (A. Sultan):} https://orcid.org/0009-0003-9785-9291
+
+
+\medskip
+{\small \centerline{\bf References:}
+\smallskip
+\noindent 1. David N. Cheban. {\it Monotone Nonautonomous
+Dynamical Systems.} Springer Nature Switzerland AG, 2024.
+
+\end{document}
