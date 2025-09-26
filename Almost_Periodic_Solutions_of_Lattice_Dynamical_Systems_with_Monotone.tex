@@ -1,0 +1,627 @@
+%%%%%% Latex file
+%%                              Almost Periodic Solutions of Lattice Dynamical Systems with Monotone Nonlinearity
+%%                                             David Cheban and Andrei Sultan
+%%                                                    June, 2025
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\usepackage{showkeys}
+%\usepackage{amscd}
+%\usepackage{latexsym}
+%\usepackage{oldlfont}
+%\usepackage{latexsym}
+%\usepackage{oldlfont}
+%\renewcommand{\baselinestretch}{1.5}-
+%\input amssym.def
+%\input amssym
+%% Title
+%\title[]{%
+% First author
+% Second author
+
+\documentclass{amsart}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\usepackage{xcolor}
+\usepackage{hyperref}
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.00.0.2552}
+%TCIDATA{LastRevised=Wednesday, January 09, 2008 22:34:42}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{Language=American English}
+\def\eps{\varepsilon}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{remark}[lemma]{Remark}
+\newtheorem{prop}[lemma]{Proposition}
+\newtheorem{coro}[lemma]{Corollary}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{example}[lemma]{Example}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\parindent0.0em
+\parskip0.7em
+%\email[T.~Caraballo]{caraball@us.es}
+%\email[D.Cheban]{cheban@usm.md}
+
+\title[Almost Periodic Solutions of Lattice Dynamical Systems \dots ]{Almost Periodic Solutions of Lattice Dynamical Systems with Monotone Nonlinearity}
+
+% First author
+\author{David Cheban}
+\address[D. Cheban]{State University of Moldova\\
+Vladimir Andrunachievici Instiy=tute of Mathematics and Computer Science\\
+Laboratory of Differential Equations\\
+A. Mateevich Street 60\\
+MD--2009 Chi\c{s}in\u{a}u, Moldova} \email[D.
+Cheban]{david.ceban@usm.md, davidcheban@yahoo.com}
+% Second author
+\author{Andrei Sultan}
+\address[A. Sultan]{%
+State University of Moldova\\Vladimir Andrunachievici Institute of
+Mathematics and Computer Science\\ Laboratory of Differential Equations\\A. Mateevich Street 60\\
+MD--2009 Chi\c{s}in\u{a}u, Moldova} \email[A.
+Sultan]{andrew15sultan@gmail.com}
+
+
+
+
+
+\date{\today}
+\subjclass{34D05, 34D45, 34G20, 37B55} \keywords{Lattice Dynamical
+Systems; Monotone non-autonomous Dynamical Systems; Almost
+Periodic Solutions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{abstract}
+The aim of this paper is studying the problem of almost
+periodicity of almost periodic lattice dynamical systems of the
+form $u_{i}'=\nu (u_{i-1}-2u_i+u_{i+1})-\lambda
+u_{i}+F(u_i)+f_{i}(t)\ (i\in \mathbb Z,\ \lambda >0)$. We prove
+the existence a unique almost periodic solution of this system if
+the nonlinearity $F$ is monotone.
+\end{abstract}
+
+\maketitle
+
+
+
+\section{Introduction}\label{Sec1}
+
+Denote by $\mathbb R :=(-\infty,\infty)$, $\mathbb Z :=\{0,\pm
+1,\pm 2,\ldots\}$ and $\ell_{2}$ the Hilbert space of all
+two-sided sequences $\xi =(\xi_{i})_{i\in \mathbb Z}$ ($\xi_{i}\in
+\mathbb R$) with
+\begin{equation}\label{eqI_1}
+\sum\limits_{i\in \mathbb Z}|\xi_{i}|^{2}<+\infty \nonumber
+\end{equation}
+and equipped with the scalar product
+\begin{equation}\label{eqI_2}
+\langle \xi,\eta\rangle :=\sum\limits_{i\in \mathbb
+Z}\xi_{i}\eta_{i} .\nonumber
+\end{equation}
+
+Let $(X,\rho)$ be a complete metric space with the distance
+$\rho$, $C(\mathbb R,X)$ be the space of all continuous functions
+$f:\mathbb R\to X$ equipped with the distance
+\begin{equation}\label{eqI_3}
+d(f_1,f_2):=\sup\limits_{L>0}\min\{\max\limits_{|t|\le
+L}\rho(f_{1}(t),f_{2}(t)),L^{-1}\}.
+\end{equation}
+The metric space $(C(\mathbb R,X),d)$ is complete and the distance
+$d$, defined by (\ref{eqI_3}), generates on the space $C(\mathbb
+R,X)$ the compact-open topology.
+
+Let $h\in \mathbb R$, $f\in C(\mathbb R,X)$, $f^{h}(t):=f(t+h)$
+for any $t\in \mathbb R$ and $\sigma :\mathbb R\times C(\mathbb
+R,X)\to C(\mathbb R,X)$ be a mapping defined by
+$\sigma(h,f):=f^{h}$ for any $(h,f)\in \mathbb R\times C(\mathbb
+R,X)$. Then \cite[Ch.I]{Che_2015} the triplet $(C(\mathbb
+R,X),\mathbb R,\sigma)$ is a shift dynamical system (or Bebutov's
+dynamical system) on he space $C(\mathbb R,X)$. By $H(f)$ the
+closure in the space $C(\mathbb R,X)$ of $\{f^{h}|\ h\in \mathbb
+R\}$ is denoted.
+
+Recall that a subset $A\subset \mathbb R$ is called relatively
+dense if there exits a positive number $l$ such that
+\begin{equation}\label{eqRD1}
+A\bigcap [a,a+l]\not= \emptyset
+\end{equation}
+for any $a\in \mathbb R$.
+
+A function $f\in C(\mathbb R,X)$ is called almost periodic
+\cite{Che_2020,Lev-Zhi}, if for any positive number $\varepsilon$
+the set
+\begin{equation}\label{eqRD2}
+\mathcal F(f,\varepsilon):=\{\tau \in \mathbb R |\
+\rho(f(t+\tau),f(t))<\varepsilon\ \ \mbox{for any}\ t\in \mathbb
+R\}
+\end{equation}
+is relatively dense.
+
+In this paper we study the problem of existence at least one
+almost periodic solution of the systems
+\begin{equation}\label{eqI1}
+u_{i}'=\nu (u_{i-1}-2u_i+u_{i+1})-\lambda u_{i}+F(u_i)+f_{i}(t)\
+(i\in \mathbb Z),
+\end{equation}
+where $\lambda >0$, $F\in C(\mathbb R, \mathbb R)$ and $f\in
+C(\mathbb R,\ell_{2})$ ($f(t):=(f_{i}(t))_{i\in \mathbb Z}$ for
+any $t\in \mathbb R$) is an almost periodic function.
+
+The system (\ref{eqI1}) can be considered as a discrete (see, for
+example, \cite{BLW_2001,HK_2023} and the bibliography therein)
+analogue of a reaction-diffusion equation in $\mathbb R$:
+\begin{equation}\label{eqI1.1}
+ \frac{\partial{u}}{\partial{t}} = D\frac{\partial^{2}{u}}{\partial^{2}{x}}-\lambda u + F(u) +
+ f(t,x),\nonumber
+\end{equation}
+where grid points are spaced $h$ distance apart and $\nu =
+D/h^{2}$.
+
+This study continues the authors works \cite{CS_2025} devoted to
+the study the problem of existence of compact global attractor for
+(\ref{eqI1}) and the work \cite{CS} dedicated to the study the
+invariant sections of monotone nonautonomous dynamical systems and
+their applications to differen classes of evolution equations. The
+invariant sections play a very important role in the study the
+problem of existence of almost periodic (respectively, almost
+automorphic, recurrent and Poisson stable) solutions of
+differential equations.
+
+The paper is organized as follows. In the second section we show
+that under some conditions the equation (\ref{eqI1}) generates a
+cocycle which plays a very important role in the study of the
+asymptotic properties of the equation (\ref{eqI1}). In the third
+section we prove that under some conditions the existence of a
+compact global attractor for the equation (\ref{eqI1}). The fourth
+section is dedicated to the study the invariant sections of the
+cocycle generated by the equation (\ref{eqI1}). In the fifth
+section we study the structure of the compact global attractor for
+the equation (\ref{eqI1}). Namely, we show that the equation
+(\ref{eqI1}) is convergent, i.e., it admits a compact global
+attractor $\mathcal I =\{I_{y}|\ y\in Y\}$ such that every set
+$I_{y}$ consists of a single point. Finally, we are analyzing an
+example of the equation of the form (\ref{eqI1}) which illustrate
+our general results.
+
+
+\section{Cocycles}\label{Sec2}
+
+Consider a non-autonomous system
+\begin{equation}\label{eq2.1}
+u_{i}'=\nu (u_{i-1}-2u_i+u_{i+1})-\lambda u_{i}+F(u_i)+f_{i}(t)\
+(i\in \mathbb Z) .
+\end{equation}
+
+Below we use the following conditions.
+
+\emph{Condition }(\textbf{C1}). \label{C1} The function $f\in
+C(\mathbb R,\mathfrak B)$ is almost periodic.
+
+\emph{Condition} (\textbf{C2}). \label{C2} The function $F\in
+C(\mathbb R,\mathbb R)$ is Lipschitz continuous on bounded sets
+and $F(0)=0$.
+
+Denote by $ \widetilde{F}:\ell_{2}\to \ell_{2}$ the Nemytskii
+operator generated by $F$, i.e.,
+$\widetilde{F}(\xi)_{i}:=F(\xi_{i})$ for any $i\in \mathbb Z$.
+
+\emph{Condition} (\textbf{C3}). \label{C3} The function $F$ is
+monotone, i.e., there exists a number $\alpha \ge 0$ such that
+\begin{equation}\label{eqAP2}
+(x_1-x_2)(F(x_1)-F(x_2))\leq -\alpha
+|x_1-x_2|^2
+\end{equation}
+for any $x_1,x_2 \in \mathbb R$.
+
+\begin{lemma}\label{lAP1} The following statements hold:
+\begin{enumerate}
+\item if the function $f$ satisfies the Conditions (C1), (C3) and
+$F(0)=0$, then
+\begin{equation}\label{eqAP3}
+F(s)s\le -\alpha s^{2}
+\end{equation}
+for any $s\in \mathbb R$; \item if the function $F$ satisfies the
+Condition (C3), then the Nemytskii operator $\widetilde{F}$
+generated by $F$ possesses the following property
+\begin{equation}\label{eqAP4}
+\langle u_1-u_2,\widetilde{F}(u_1)-\widetilde{F}(u_2)\rangle \le
+-\alpha \|u_1-u_2\|^{2}
+\end{equation}
+for any $u_1,u_2\in \ell_{2}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+
+\begin{definition}\label{defL1.8} A function $F\in C(Y\times \mathfrak B,\mathfrak
+B)$ is said to be Lipschitzian on bounded subsets from $\mathfrak
+B$ if for any bounded subset $B\subset \mathfrak B$ there exists a
+positive constant $L_{B}$ such that
+\begin{equation}\label{eqL1.82}
+|F(y,v_1)-F(y,v_2)|\le L_{B} |v_1-v_2|
+\end{equation}
+for any $v_1, v_2 \in B \subset \mathfrak B$.
+\end{definition}
+
+\begin{definition}\label{defL2.8}
+The smallest constant $L$ (respectively $L_{B}$) with the property
+(\ref{eqL1.81}) is called Lipshchitz constant of function $F$
+(notation $Lip(F)$ (respectively, $Lip_{B}(F)$)).
+\end{definition}
+
+Let $B \subset \mathfrak B$, denote by $CL(Y\times B,\mathfrak B)$
+the Banach space of any Lipschitzian functions $F\in C(Y\times
+B,\mathfrak B)$ equipped with the norm
+\begin{equation}
+||F||_{CL}:=\max\limits_{y\in Y}|F(y,0)|+Lip_{B}(F).\nonumber
+\end{equation}
+
+\begin{lemma}\label{l2.2} \cite{BLW_2001} Under the Condition (\textbf{C2})
+it is well defined the mapping $\widetilde{F}:\ell_{2}\to
+\ell_{2}$ and
+\begin{equation}\label{eq2.2}
+\|\widetilde{F}(\xi)-\widetilde{F}(\eta)\|\le Lip_{B}(F)\|\xi
+-\eta \| \nonumber
+\end{equation}
+for any $\xi,\eta\in \ell_{2}$, where $\|\cdot\|^{2}:=\langle
+\cdot,\cdot \rangle$ and $\|\cdot \|$ is the norm on the space
+$\ell_{2}$.
+\end{lemma}
+
+For any $u = (u_{i})_{i\in \mathbb Z}$, the discrete Laplace
+operator $\Lambda$ is defined \cite[Ch.III]{HK_2023} from
+$\ell_{2}$ to $\ell_{2}$ component wise by $\Lambda(u)_{i} =
+u_{i-1} - 2u_{i} + u_{i+1}$ ($i\in \mathbb Z$). Define the
+bounded linear operators $D^{+}$ and $D^{-}$ from $\ell_{2}$ to
+$\ell_{2}$ by $(D^{+}u)_{i} = u_{i+1} - u_{i},\ (D^{-}u)_{i} =
+u_{i-1} - u_{i}\ (i\in \mathbb Z)$.
+
+Note that $\Lambda = D^{+}D^{-} = D^{-}D^{+}$ and $\langle D^{-}u,
+v\rangle = \langle u, D^{+}v\rangle $ for any $u,v\in \ell_{2}$
+and, consequently, $\langle \Lambda u,u \rangle = -|D^{+}u|^{2}\le
+0$. Since $\Lambda$ is a bounded linear operator acting on the
+space $\ell_{2}$, it generates a uniformly continuous semi-group
+on $\ell_{2}$.
+
+Under the Conditions (\textbf{C1}) and (\textbf{C2}) the system of
+differential equations (\ref{eq2.1}) can be written in the form of
+an ordinary differential equation
+\begin{equation}\label{eq2.3}
+u'=\nu \Lambda u +\Phi (u)+f(t)
+\end{equation}
+in the Banach space $\mathfrak B=\ell_{2}$, where
+$\Phi(u):=-\lambda u +\widetilde{F} (u)$ and
+$\Lambda(u)_{i}:=u_{i-1}-2u_{i}+u_{i+1}$ for any $u=(u_i)_{i\in
+\mathbb Z}\in \ell_{2}$. Along with the equation (\ref{eq2.3}) we
+consider also it $H$-class, i.e., the family equations
+\begin{equation}\label{eq2.3g}
+u'=\nu \Lambda u +\Phi (u)+g(t),
+\end{equation}
+where $g\in H(f)$.
+
+The family of the equations (\ref{eq2.3g}) can be rewritten as
+follows
+\begin{equation}\label{eq2.3H}
+u'=F(\sigma(t,g),u)\ \ (g\in H(f)),
+\end{equation}
+where $F:H(f)\times \ell_{2}\to \ell_{2}$ is defined by
+$F(g,u):=\nu \Lambda u+\Phi (u) +g(0)$. It easy to see that
+$F(\sigma(t,g),u)=\nu \Lambda u+\Phi (u)+g(t)$ for any $(t,u,g)\in
+\mathbb R\times \mathfrak B \times H(f)$.
+
+Let $(Y,\mathbb R,\sigma)$ be a dynamical system on the metric
+space $Y$.
+
+\begin{theorem}\label{thAP1} \cite{CS_2025} Under the Conditions (\textbf{C1})-(\textbf{C3}) the following statements hold:
+\begin{enumerate}
+    \item for any $(v,g)\in \ell_{2}\times H(f)$ there exists a unique
+    solution $\varphi(t,v,g)$ of the equation (\ref{eq2.3g}) passing
+    through the point $v$ at the initial moment $t=0$ and defined on
+    the semi-axis $\mathbb R_{+}:=[0,+\infty)$; \item
+    $\varphi(0,v,g)=v$ for any $(v,g)\in \ell_{2}\times H(f)$; \item
+    $\varphi(t+\tau,v,g)=\varphi(t,\varphi(\tau,v,g),g^{\tau})$ for
+    any $t,\tau\in \mathbb R_{+}$, $v\in \ell_{2}$ and $g\in H(f)$;
+     \item the mapping
+    $\varphi :\mathbb R_{+}\times \ell_{2}\times H(f)\to \ell_{2}$
+    ($(t,v,g)\to \varphi(t,v,g))$ for any $(t,v,g)\in \mathbb
+    R_{+}\times \ell_{2}\times H(f)$ is continuous.
+\end{enumerate}
+\end{theorem}
+
+Let $Y$ be a complete metric space and $(Y,\mathbb R,\sigma)$ be a
+dynamical system on $Y$.
+
+\begin{definition}\label{defC1} Recall \cite[Ch.I]{Che_2015} that
+$\langle \mathfrak B,\varphi, (Y,\mathbb R,\sigma)\rangle$ is said
+to be a cocycle over $(Y,\mathbb R,\sigma)$ with the fiber
+$\mathfrak B$ if $\varphi$ is a continuous mapping acting from
+$\mathbb R_{+}\times \mathfrak B\times Y$ to $\mathfrak B$ and
+satisfying the following conditions:
+\begin{enumerate}
+\item $\varphi(0,u,y)=v$ for any $(v,y)\in \mathfrak B\times Y$;
+\item
+$\varphi(t+\tau,u,y)=\varphi(t,\varphi(\tau,u,t),\sigma(\tau,y))$
+for any $t,\tau \in \mathbb R_{+}$ and $(u,y)\in \mathfrak B\times
+Y$.
+\end{enumerate}
+\end{definition}
+
+\begin{coro}\label{corH1}
+Under the conditions of Theorem \ref{thAP1} the equation
+(\ref{eq2.3}) (respectively, the family of equations
+(\ref{eq2.3g})) generates a cocycle $\langle
+\ell_{2},\varphi,(H(f),\mathbb R,\sigma)\rangle$ over the shift
+dynamical system $(H(f),\mathbb R,\sigma)$ with the fiber
+$\ell_{2}$.
+\end{coro}
+
+\begin{theorem}\label{thAP2} Under the conditions (C1)-(C3) the
+cocycle $\langle \ell_{2},\varphi, (H(f),\mathbb R,\sigma)\rangle$
+generated by the equation (\ref{eq2.3}) possesses the following
+property:
+\begin{equation}\label{eqAP4}
+\|\varphi(t,v_1,g)-\varphi(t,v_2,g)\|\le e^{-(\lambda +\alpha)
+t}\|v_1-v_2\|
+\end{equation}
+for any $v_1,v_2\in \ell_{2}$, $t\ge 0$ and $g\in H(f)$.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\section{Compact global attractors}
+
+\begin{definition}\label{defCGA0_1} A family $\{I_{y}|\ y\in Y\}$ of
+compact subsets $I_{y}$ of $\mathfrak B$ is said to be a compact
+global attractor for the cocycle $\langle \mathfrak
+B,\varphi,(Y,\mathbb R,\sigma)\rangle$ if the following conditions
+are fulfilled:
+\begin{enumerate}
+\item the set
+\begin{equation}\label{eqCGA1}
+\mathcal I :=\bigcup \{I_{y}|\ y\in Y\}\nonumber
+\end{equation}
+is precompact; \item the family of subsets $\{I_{y}|\ y\in Y\}$ is
+invariant, i.e., $\varphi(t,I_{y},y)=I_{\sigma(t,y)}$ for any
+$(t,y)\in \mathbb R_{+}\times Y$; \item
+\begin{equation}\label{eqCGA2}
+\lim\limits_{t\to +\infty}\sup\limits_{y\in
+Y}\beta(\varphi(t,M,y),\mathcal I)=0\nonumber
+\end{equation}
+\end{enumerate}
+for any compact subset $M$ from $\mathfrak B$.
+\end{definition}
+
+
+\begin{definition}\label{defCGA1} A cocycle $\varphi$ is said to be
+dissipative if there exists a bounded subset $K\subset \mathfrak
+B$ such that for any bounded subset $B\subset \ \mathfrak B$ there
+exists a positive number $L=L(B)$ such that
+$\varphi(t,B,Y)\subseteq K$ for any $t\ge L(B)$, where
+$\varphi(t,B,Y):=\{\varphi(t,u,y)|\ (u,y)\in B\times Y\}$.
+\end{definition}
+
+
+\begin{theorem}\label{thCGA1} \cite[Ch.II]{Che_2024} Assume that the metric space $Y$ is
+compact and the cocycle $\langle \mathfrak B,\varphi,(Y,\mathbb
+R,\sigma)\rangle$ is dissipative and asymptotically compact.
+
+Then the cocycle $\varphi$ has a compact global attractor.
+\end{theorem}
+
+\begin{theorem}\label{thCGA2} Under the Conditions
+(\textbf{C1})-(\textbf{C3}) the equation (\ref{eq2.3}) (the
+cocycle $\varphi$ generated by the equation (\ref{eq2.3})) has a
+compact global attractor $\{I_{g}|\ g\in H(f)\}$.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+
+\section{Invariant sections of monotone nonautonomous dynamical
+systems}
+
+
+Below we prove that under some conditions a nonautonomous
+dynamical system admits an invariant continuous section.
+
+Let $(Y,\mathbb{R},\sigma)$ be a two-sided dynamical system,
+$(X,\mathbb{R_{+}}, \pi)$ be a semi-group dynamical system and
+$h:X\to Y$ be a homomorphism of $(X,\mathbb{R_{+}},\pi)$ onto
+$(Y,\mathbb{R},\sigma)$.
+
+Let $\langle(X,\mathbb{R_{+}},\pi),(Y,\mathbb{R},\sigma),h\rangle$
+be a nonautonomous dynamical system.
+
+Recall that a point $x\in X$ (respectively, a motion $\pi(t,x)$) is
+said to be almost periodic, if the continuous mapping
+$\pi(\cdot,x):\mathbb T\to X$ is almost periodic.
+
+\begin{definition} A mapping $\gamma :Y\mapsto X$ is called a
+continuous invariant section if the following conditions are
+fulfilled:
+\begin{enumerate}
+\item $h(\gamma(y))=y$ for all $y\in Y$; \item
+$\gamma(\sigma(t,y))=\pi(t,\gamma(y))$ for any $y\in Y$ and $t\in
+R_{+}$; \item $\gamma$ is continuous.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{lCIS1} Let $(X,\mathbb T_{1},\pi)$ and $(Y,\mathbb T_{2},\sigma)$ be two dynamical systems,
+$\mathbb T_{1}\subseteq \mathbb T_{2}$ and $\gamma :Y\mapsto X$ be
+a continuous invariant section. If the point $x\in X$
+(respectively, the motion $\pi(t,x)$) is almost periodic, then the
+point $y=h(x)$ (respectively, the motion
+$\sigma(y,t)=\sigma(t,h(x))=h(\pi(t,x))$ for any $t\in \mathbb
+T_{1}$) is also almost periodic.
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+
+\begin{remark}\label{r3.1}
+A continuous section $\gamma\in\Gamma(Y,X)$ is invariant if and
+only if $\gamma\in\Gamma(Y,X)$ is a stationary point of the
+semigroup $\{S^t\ \vert \ t\in \mathbb{R}_{+} \}$, where $S^t:
+\Gamma(Y,X)\to \Gamma(Y,X)$ is defined by the equality
+$(S^t\gamma)(y):=\pi(t,\gamma(\sigma(-t,y)))$ for all $y\in Y$ and
+$t\in \mathbb R_+$.
+\end{remark}
+
+
+\begin{theorem}\label{thAPM1} Let $\langle \ell_{2} ,\varphi, (H(f),\mathbb
+R,\sigma)\rangle$be the cocycle generated by the equation
+(\ref{eq2.3}). Under the condition (C1)-(C3) there exists a unique
+invariant section $\nu :H(f)\to \ell_{2}$ of the cocycle $\varphi$
+and
+\begin{equation}\label{eqAPM1}
+\|\varphi(t,v,g)-\nu(\sigma(t,g))\|\le e^{-\alpha t}\|v-\nu(g)\|
+\end{equation}
+for any $t\in \mathbb R_{+}$ and $v\in \ell_{2}$.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+
+\begin{coro}\label{corAPM1} Under the Conditions (C!)-(C3) the
+equation (\ref{eq2.3}) has a unique almost periodic solution.
+\end{coro}
+
+\section{Convergent nonautonomous lattice dynamical systems}
+
+Let $\langle W,\varphi,(Y,\mathbb T,\sigma)\rangle$ (or shortly
+$\varphi$) be a cocycle over dynamical system $(Y,\mathbb
+T,\sigma)$ with the fiber $W$.
+
+\begin{definition}\label{defCS1} A cocycle $\langle W,\varphi,(Y,\mathbb
+T,\sigma)\rangle$ wit the compact base space $Y$ is said to be
+convergent if the following conditions are fulfilled:
+\begin{enumerate}
+\item the cocycle $\varphi$ admits a compact global attractor
+$\mathcal I =\{I_{y}|\ y\in Y\}$; \item for any $y\in Y$ the set
+$I_{y}$ consists of a single point $\{w_{y}\}$, i.e.,
+$I_{y}=\{w_y\}$.
+\end{enumerate}
+\end{definition}
+
+
+\begin{theorem}\label{thCGA_2} Under the Conditions
+(\textbf{C1})-(\textbf{C3}) the equation (\ref{eq2.3}) (the
+cocycle $\varphi$ generated by the equation (\ref{eq2.3})) is
+convergent, i.e., it has a compact global attractor $\mathcal I
+=\{I_{g}|\ g\in H(f)\}$ such that for any $g\in H(f)$ the set
+$I_{g}$ consists of a single point.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\section{Funding}
+
+This research was supported by the State Program of the Republic
+of Moldova "Monotone Nonautonomous Dynamical Systems
+(24.80012.5007.20SE)" and partially was supported by the
+Institutional Research Program 011303 "SATGED", Moldova State
+University.
+
+\section{Conflict of Interest}
+
+The authors declare that the have not conflict of interest.
+
+
+
+
+\begin{thebibliography}{100}
+
+\bibitem{BLW_2001} Petr W. Bates, Kening Lu and Bixiang Wang,
+\newblock Attractors for Lattice Dynamical Systems.
+\newblock International Journal of Bifurcation
+and Chaos, Vol. 11, No. 1 (2001), pp.143-153.
+
+%\bibitem{Bur} Burbaki N.,
+%\newblock{\em Function d'une variable
+%r\'{e}elle. Theorie \'{e}l\'{e}mentaire.}
+%\newblock Paris,       .
+
+\bibitem{Che_2015} Cheban D. N.
+\newblock{\em Global Attractors of Nonautonomous Dynamical and Control
+Systems. 2nd Edition.}
+\newblock Interdisciplinary Mathematical Sciences,
+vol.18, River Edge, NJ: World Scientific, 2015, xxv+589 pp.
+
+
+\bibitem{Che_2020} David N. Cheban,
+\newblock{\em Nonautonomous Dynamics: \emph{Nonlinear Oscillations and
+Global Attractors}.}
+\newblock{\em Springer Nature Switzerland AG 2020,} xxii+ 434 pp.
+
+\bibitem{Che_2024} David N. Cheban,
+\newblock Monotone Nonautonomous Dynamical Systems.
+\newblock{\em Springer Nature Switzerland AG,} 2024, xix+460 pp.
+
+\bibitem{CS} Cheban D. N. and Schmalfuss B.,
+\newblock Invariant Manifolds, Global Attractors,
+Almost Automrphic and Almost Periodic Solutions of Non-Autonomous
+Differential Equations.
+\newblock{\em Journal of Mathematical Analysis and Applications,} \textbf{340}, no.1 (2008), 374-393.
+
+\bibitem{CS_2025} David Cheban and Andrei Sultan,
+\newblock Compact Global Attractors of Nonautonomous Lattice Dynamical Systems.
+\newblock{\em  Buletinul Academiei de Stiinte a
+Republicii Moldova. Matematica} (to be submitted in 2025).
+
+%\bibitem{DK_1970}
+%Daletskii Yu. L. and Krein M. G.,
+%\newblock {\em Stability of Solutions of Differential Equations in Banach
+%Space}.
+%\newblock Moscow, "Nauka", 1970, 534 pp. [English transl., Amer. Math. Soc., Providence, RI
+%1974.]
+
+\bibitem{HK_2023} Xiaoying Han and Peter Kloeden,
+\newblock Dissipative Lattice Dynamical systems.
+\newblock World Scientific, Singapoor, 2023, xv+364 pp.
+
+
+\bibitem{Lev-Zhi} Levitan B. M. and Zhikov V. V.,
+\newblock{\em Almost Periodic Functions and Differential
+    Equations.}
+\newblock Moscow State University Press, Moscow, 1978 (in Russian).
+[English translation: Almost Periodic Functions and Differential
+Equations. Cambridge Univ. Press, Cambridge, 1982]
+
+
+%\bibitem{Sel_1971}
+%%Sell G. R.,
+%\newblock  Lectures on Topological Dynamics and Differential Equations,
+%{\bf vol.2} of {\it Van Nostrand Reinhold math. studies}.
+%\newblock Van Nostrand--Reinbold, London, 1971.
+
+%\bibitem{sib}
+%K. S. Sibirsky,
+%\newblock {\em Introduction to Topological Dynamics.\/}
+%\newblock Kishinev, RIA AN MSSR, 1970, 144 p. (in Russian). [English
+%translationn: Introduction to Topological Dynamics. Noordhoff,
+%Leyden, 1975]
+
+%\bibitem{hartman}
+%P. Hartman, On stability in the large for systems of ordinary differential equations.
+%Can. J. Math. 13 (1961), 480-492
+
+\end{thebibliography}
+
+\end{document}
